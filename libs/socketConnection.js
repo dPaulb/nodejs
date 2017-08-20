@@ -8,7 +8,7 @@ var url = 'mongodb://127.0.0.1:27017/boothbooth'
 
 module.exports = function(io){
     MongoClient.connect(url, function(err, db){
-        var messagesCollection = db.collection('messages')
+        //var messagesCollection = db.collection('messages')
 
         var userList = [];
         io.on('connection', function(socket){
@@ -24,7 +24,7 @@ module.exports = function(io){
 
             //io.emit('server message', {message : "유저가 입장했습니다."/*socket.id*/, displayname : user.displayName})
 
-            messagesCollection.find().toArray().then(function(docs){
+          db.collection("messages").find().toArray().then(function(docs){
                 io.emit("chatHistory", docs);
 
             })
