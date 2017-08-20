@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
+    <title>JK's BOOTH ROOM</title>
+    <style>
+        body{
+            background-color: rgba(189, 189, 189, 0.17);
+        }
+        hr{
+            border :  solid 1px black;
+        }
+
+        .main_banner{
+            padding-top: 30px;
+            border-radius : 10px;
+            margin-bottom: 30px;
+            color: inherit;
+
+
+        }
+        .main_booth_banner{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            color: inherit;
+            background-color : white;
+        }
+
+        img {
+            width : 100%;
+            height : 100%;
+            border-radius: 5px;
+        }
+
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+
+        }
+
+        .noimage img {
+            display : none;
+
+        }
+
+        #colmd3 {
+            width : 25%;
+            height : 250px;
+            margin-bottom : 10px;
+            padding-right :5px;
+            padding-left : 5px;
+        }
+
+        .modal-dialog.modal-fullsize {
+            width: 50%;
+            height: 50%;
+            margin: 0;
+            padding: 0;
+        }
+        .modal-content.modal-fullsize {
+            height: auto;
+            min-height: 100%;
+            border-radius: 10px;
+        }
+
+        .modal.modal-center {
+            text-align: center;
+        }
+
+        @media screen and (min-width: 768px) {
+            .modal.modal-center:before {
+                display: inline-block;
+                vertical-align: top;
+                content: " ";
+                height: 100%;
+            }
+        }
+
+        .modal-dialog.modal-center {
+            display: inline-block;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .modal-image {
+            height : 500px;
+            width : 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width : 992px){
+            #colmd3 {
+                height : 190px;
+                width : 25%;
+                object-fit : cover;
+                margin-bottom : 10px;
+                padding-right : 2px;
+                padding-left : 2px;
+            }
+
+            .modal-dialog.modal-fullsize {
+                width:70%;
+                height: 60%;
+                margin: 0;
+                padding: 0;
+            }
+            .modal-content.modal-fullsize {
+                height: auto;
+                min-height: 100%;
+                border-radius: 10px;
+            }
+            .modal-image {
+                height : 250px;
+                width : 100%;
+                object-fit: cover;
+            }
+            .modal.modal-center:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+            }
+        }
+
+        @media (max-width : 800px){
+            #colmd3 {
+                height : 190px;
+                width : 25%;
+                object-fit : cover;
+                margin-bottom : 10px;
+                padding-right : 2px;
+                padding-left : 2px;
+            }
+
+            .modal-dialog.modal-fullsize {
+                width:70%;
+                height: 30%;
+                margin: 0;
+                padding: 0;
+            }
+            .modal-content.modal-fullsize {
+                height: auto;
+                min-height: 100%;
+                border-radius: 10px;
+            }
+            .modal-image {
+                height : 500px;
+                width : 100%;
+                object-fit: cover;
+            }
+            .modal.modal-center:before {
+                display: inline-block;
+                vertical-align: top;
+                content: " ";
+                height: 100%;
+            }
+        }
+
+        @media (max-width : 530px){
+            #colmd3 {
+                height : 150px;
+                width : 25%;
+                object-fit : cover;
+                margin-bottom : 10px;
+                padding-right : 2px;
+                padding-left : 2px;
+            }
+
+            .modal-dialog.modal-fullsize {
+                width:80%;
+                height: 60%;
+                margin: 0;
+                padding: 0;
+            }
+            .modal-content.modal-fullsize {
+                height: auto;
+                min-height: 100%;
+                border-radius: 10px;
+            }
+            .modal-image {
+                height : 250px;
+                width : 100%;
+                object-fit: cover;
+            }
+            .modal.modal-center:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+            }
+        }
+
+
+        @media (max-width : 414px){
+            #colmd3 {
+                height : 100px;
+                width : 25%;
+                object-fit : cover;
+                margin-bottom : 10px;
+                padding-right : 2px;
+                padding-left : 2px;
+            }
+
+            .modal-dialog.modal-fullsize {
+                width:80%;
+                height: 60%;
+                margin: 0;
+                padding: 0;
+            }
+            .modal-content.modal-fullsize {
+                height: auto;
+                min-height: 100%;
+                border-radius: 10px;
+            }
+            .modal-image {
+                height : 250px;
+                width : 100%;
+                object-fit: cover;
+            }
+            .modal.modal-center:before {
+                display: inline-block;
+                vertical-align: middle;
+                content: " ";
+                height: 100%;
+            }
+        }
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+
+
+
+<div class="container">
+    <div class="main_banner">
+        <a href="/" class="btn btn-align-left" style="color : black">
+            <span class="glyphicon glyphicon-home"></span>
+        </a>
+        <a href="/"><h1 style="color : black; text-align: center">JK's BOOTH</h1></a>
+
+
+
+
+        <div class="row">
+            <hr>
+        </div>
+        <div class="row">
+            <%category.forEach(function(category){%>
+            <%if(category.photoName){
+                var foo = category.photoName.split("/");
+            for(var i = 1;i<foo.length;i++){
+            %>
+            <div class="col-xs-3" id="colmd3">
+
+
+                <a href="#" data-toggle="modal" data-target="#myModal<%=foo[1].split(".")[0]%>"><img style="object-fit : cover;" src="uploads/<%=foo[1]%>"></a>
+
+
+                <!-- image_view_Modal -->
+                <div class="modal modal-center fade" id="myModal<%=foo[1].split(".")[0]%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-fullsize modal-center" role="document">
+                        <div class="modal-content modal-fullsize">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true" >&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel"><%=category.title%></h4>
+                            </div>
+                            <div class="modal-body">
+
+
+                                <a href="#"><img src="uploads/<%=foo[1]%>" class="modal-image"></a>
+                                <div class="noimage"><%-category.content%></div>
+                                <a href="/morephoto/<%=category.id%>" class="btn btn-primary">More</a>
+                            </div>
+                            <div class="modal-footer">
+                                <a href="/photocategoryselect/delete/<%=category.id%>" type="button" class="btn btn-danger">삭제하기</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+            </div>
+            <%}}%>
+            <%});%>
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- upload_Modal -->
+<!--<div class="modal fade" id="upload_image_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
+    <!--<div class="modal-dialog" role="document">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header" style="background-color: #F0F0F0">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true" >&times;</span></button>-->
+                <!--<h4 class="modal-title" id="myModalLabel">게시물 작성</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+
+                <!--<form id="upload_form" action="" method="post" enctype="multipart/form-data">-->
+                    <!--<input type="text" name="name" class="form-control" placeholder="제목">-->
+
+                    <!--<img name="blah" id="blah" src="/img/white.jpg" alt="your image" style="width : 100%; height : 100%;"/>-->
+                    <!--<span class="btn btn-default btn-lg btn-file">-->
+                    <!--사진 찾기 <input type="file" id="imgInp" name="photo" multiple>-->
+                <!--</span>-->
+                    <!--<br>-->
+                    <!--<br>-->
+                    <!--<textarea id="summernote" name="content"></textarea>-->
+                    <!--<input type="submit" class="btn btn-default" value="올리기">-->
+                <!--</form>-->
+            <!--</div>-->
+            <!--<div class="modal-footer" style="background-color: #F0F0F0">-->
+
+
+            <!--</div>-->
+
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#summernote').summernote();
+
+
+
+    });
+
+
+    $(function() {
+        $("#imgInp").on('change', function(){
+            readURL(this);
+        });
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+
+</script>
+
+
+<%include ../footer.ejs%>

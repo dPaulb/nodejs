@@ -1,0 +1,50 @@
+<%include ../header.ejs%>
+<div class="row">
+    <%category.forEach(function(category){%>
+    <%if(category.photoName){
+        var foo = category.photoName.split("/");
+    for(var i = 1;i<foo.length;i++){
+    %>
+    <div class="col-xs-3" id="colmd3">
+
+
+        <a href="#" data-toggle="modal" data-target="#myModal<%=foo[1].split(".")[0]%>"><img style="object-fit : cover;" src="../uploads/<%=foo[1]%>"></a>
+
+
+        <!-- image_view_Modal -->
+        <div class="modal modal-center fade" id="myModal<%=foo[1].split(".")[0]%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-fullsize modal-center" role="document">
+                <div class="modal-content modal-fullsize">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true" >&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel"><%=category.title%></h4>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <a href="#"><img src="../uploads/<%=foo[1]%>" class="modal-image"></a>
+                        <div class="noimage"><%-category.content%></div>
+                        <a href="/morephoto/<%=category.id%>" class="btn btn-primary">More</a>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="/photocategoryselect/delete/<%=category.id%>" type="button" class="btn btn-danger">삭제하기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </div>
+    <%}}%>
+    <%});%>
+</div>
+
+
+<%include ../footer.ejs%>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>JK's BOOTH ROOM</title>
+    <style>
+        body{
+
+            background-color: rgba(189, 189, 189, 0.17);
+
+        }
+        hr{
+            border :  solid 1px black;
+        }
+
+        .main_banner{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            color: inherit;
+
+        }
+        .main_booth_banner{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            color: inherit;
+            background-color : white;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="main_banner">
+
+        <a href="/" class="btn btn-align-left" style="color : black">
+            <span class="glyphicon glyphicon-home"></span>
+        </a>
+        <h1 style="color : black; text-align: center">JK's BOOTH</h1>
+        <div class="row">
+            <hr>
+        </div>
+        <form action="" method="post" id="writeForm" enctype="multipart/form-data">
+            <table class="table table-bordered">
+                <tr>
+                    <td><input type="text" id="title" name="title" class="form-control" value="" placeholder="카테고리 이름을 적어주세요."/></td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <input type="file" class="form-control" name="thumbnail" multiple placeholder="섬네일 사진을 선택해주세요.">
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea name="description" class="form-control" id="summernote" placeholder="사진들을 선택해주세요."><%=category.content%></textarea>
+                    </td>
+                </tr>
+            </table>
+            <button class="btn btn-primary">작성하기</button>
+        </form>
+
+
+        <div class="container">
+            <div class="row">
+                <hr>
+
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-4">
+                    <h5 style="text-align: center; color : black">Copyright &copy; 2017 JK All Rights Reserved</h5>
+                    <h5 style="text-align: center; color : black">Made by Dongho Choi</h5>
+
+                </div>
+
+                <div class="col-md-4">
+                    <div class="pull-right">
+                        <a href="/admin" class="btn btn-align-left" style="color : black">
+                            <span class="glyphicon glyphicon-circle-arrow-up" style="font-size : 30px;"></span>
+                        </a>
+
+                        <a href="#" class="btn btn-align-left" style="color : black">
+                            <span class="glyphicon glyphicon-music" style="font-size : 30px;"></span>
+                        </a>
+                        <%if(isLogin){%>
+                        <div class="pull-right">
+                            <a href="/accounts/logout" class="btn btn-align-left" style="color : black">
+                                <span class="glyphicon glyphicon-log-out" style="font-size : 30px;"></span>
+                            </a>
+                        </div>
+                        <%}%>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- 스타일관련 -->
+            <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
+            <!-- 자바스크립트관련 -->
+            <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
+            <!-- 한글관련 -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/lang/summernote-ko-KR.min.js"></script>
+
+            <script>
+                $(document).ready(function(){
+
+                    $('#summernote').summernote({
+                        lang: 'ko-KR',
+                        height: 300,
+                        callbacks : {
+                            onImageUpload: function(files) {
+                                for(var i = 0;i<files.length;i++){
+                                    sendFile(files[i]);
+                                }
+
+
+                            }
+                        }
+                    });
+
+                    function sendFile(file, editor, welEditable) {
+                        data = new FormData();
+                        data.append("thumbnail", file);
+                        $.ajax({
+                            data: data,
+                            type: "POST",
+                            url: '/admin/products/ajax_summernote/',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function(url) {
+                                $('#summernote').summernote("insertImage", url);
+                            }
+                        });
+                    }
+
+
+                });
+            </script>
+        </div>
+    </div>
+</body>
+</html>

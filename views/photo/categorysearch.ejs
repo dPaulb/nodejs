@@ -1,0 +1,15 @@
+<% include ../header.ejs%>
+
+<div class="col-xs-4">
+</div>
+<div class="col-xs-4">
+    <h4 style="text-align:center">카테고리 찾기</h4>
+    <form name="searchForm" method="get" action="/categorysearch/result">
+        <input type="text" class="form-control" name="category" placeholder="찾을 카테고리의 이름을 입력해주세요">
+        <input class="btn btn-primary pull-right" type="submit" style="margin-top: 10px" value="카테고리 찾기"></input>
+    </form>
+</div>
+<div class="col-xs-4">
+</div>
+
+<% include ../footer.ejs%>

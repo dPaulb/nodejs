@@ -1,0 +1,214 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Socket.IO chat</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font: 13px Helvetica, Arial; }
+        form { background: #000; padding: 3px; width: 100%; }
+        form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+        form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+        #messages { list-style-type: none; margin: 0; padding: 0; }
+        #messages li { padding: 5px 10px; }
+        #messages li:nth-child(odd) { background: #eee; }
+
+
+        body{
+
+            background-color: rgba(189, 189, 189, 0.17);
+
+        }
+        hr{
+            border :  solid 1px black;
+        }
+
+        .main_banner{
+            padding-top: 30px;
+            border-radius : 10px;
+            margin-bottom: 30px;
+            color: inherit;
+
+
+        }
+        .main_booth_banner{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            color: inherit;
+            background-color : white;
+        }
+
+        img {
+
+
+            width : 100%;
+            height : 100%;
+            border-radius: 5px;
+
+
+
+
+
+
+
+        }
+
+
+
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+
+        }
+
+        .noimage img {
+            display : none;
+
+        }
+
+        #colmd3 {
+            width : 25%;
+            height : 250px;
+            margin-bottom : 10px;
+            padding-right :5px;
+            padding-left : 5px;
+        }
+
+        @media (max-width : 992px){
+            #colmd3 {
+                height : 150px;
+                width : 33%;
+                object-fit : cover;
+                margin-bottom : 10px;
+                padding-right : 2px;
+                padding-left : 2px;
+            }
+        }
+
+
+
+
+
+        .panel-default ul { padding-left:0px; }
+        .panel-default ul li { list-style:none; padding-left:0px;}
+        .panel-default .panel-body {min-height:350px; max-height:350px;  overflow-y:scroll; }
+        #chatWrap ul li strong::after { content: " : "; }
+        @media (max-width: 768px) {
+            #userWrap { display:none; }
+            #chatWrap .panel-body { min-height:250px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+
+        <div class="main_banner">
+
+            <a href="/" class="btn btn-align-left" style="color : black">
+                <span class="glyphicon glyphicon-home"></span>
+            </a>
+            <h1 style="color : black; text-align: center">JK's BOOTH</h1>
+            <div class="row">
+                <hr>
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="panel panel-default" id="chatWrap">
+                <div class="panel-heading">대화내용</div>
+                <div class="panel-body">
+                    <ul id="chatBody"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="panel panel-default" id="userWrap">
+                <div class="panel-heading">User</div>
+                <div class="panel-body">
+                    <ul id="userList"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<form action="" method="post" id="sendForm">
+    <input type="hidden" name="socketId">
+    <input id="m" name="message" autocomplete="off" /><button>Send</button>
+</form>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    (function(){
+        var socket = io();
+
+
+
+        function updateUserList(userList){
+            $('#userList').html("");
+            for(var key in userList){
+                $('#userList').append('<li>' + userList[key] + '</li>');
+            }
+
+
+        }
+
+        socket.on('chatHistory', function(data){
+            $.each(data, function(){
+                $('#chatBody').append('<li><strong>'+ this.displayname +'</strong>' + this.text + '</li>')
+            })
+        })
+
+        socket.on('join', function(data){
+            updateUserList(data);
+        });
+
+
+
+        socket.on('server message',function(data){
+            $('#chatBody').append('<li><strong>'+ data.displayname +'</strong>' + data.message + '</li>');
+        })
+
+        socket.on('leave', function(data){
+            $('#chatBody').html('')
+            updateUserList(data);
+        });
+
+
+
+        $(document).ready(function(){
+            $('#sendForm').submit(function(){
+                var $massage = $('#sendForm input[name=message]');
+                socket.emit('client message', { message : $massage.val()});
+                $massage.val('');
+                return false;
+            })
+        })
+    })();
+
+</script>
+</body>
+</html>

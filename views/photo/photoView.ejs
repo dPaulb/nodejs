@@ -1,0 +1,89 @@
+<% include ../header.ejs%>
+<div class="col-xs-2"></div>
+<img src="/uploads/<%=uploadPath%>">
+
+
+    <hr>
+    <div>
+
+        <div id="commentArea">
+            <% comment.forEach(function(comment){%>
+            <div>
+                <%=comment.displayName%> : <%=comment.content%>
+                <%if(userData.userID === comment.userID || userData.userID === 'admin'){%>
+                (<a class="comment_delete" comment_id="<%=comment.id%>">삭제</a>)
+                <%}%>
+            </div>
+            <%})%>
+        </div>
+        <div>
+            <form method="post" action="" id="commentForm">
+                <input type="hidden" name="uploadPath" value="<%=uploadPath%>">
+                <textarea class="form-control" name="content"></textarea>
+                <button class="btn btn-primary" style="margin-top: 10px">댓글작성</button>
+            </form>
+        </div>
+    </div>
+
+
+
+<div class="col-xs-2"></div>
+
+<script>
+    (function(){
+        $(document).ready(function(){
+            $('#commentForm').submit(function(){
+                var $contentVal = $(this).children('textarea[name=content]').val();
+                if($contentVal){
+                    $.ajax({
+                        type : 'post',
+                        url : '/photoView/ajax_comment/insert',
+                        data : $(this).serialize()
+                    })
+                        .done(function(args){
+                            if(args.message === "success"){
+                                $('#commentArea').append(
+                                    '<div>' + args.displayName + " : "+  args.content + '(<a class="comment_delete" comment_id="' + args.id + '">삭제</a>) ' +  '</div>'
+                                )
+                                $('#commentForm').children('textarea[name=content]').val("")
+                            }
+                        })
+                        .fail(function(args) {
+                            alert("로그인을 해주세요.");
+                            location.href = "/accounts/login"
+                        });
+                }
+                else{
+                    alert("댓글을 입력해주세요")
+                }
+                return false;
+            });
+
+            $(document).on('click', '.comment_delete',function(){
+                if(confirm("삭제 하시겠습니까?")){
+                    var $self = $(this);
+                    $.ajax({
+                        type : 'post',
+                        url : '/photoView/ajax_comment/delete',
+                        data : {
+                            comment_id : $self.attr('comment_id')
+                        }
+                    })
+                        .done(function(){
+                            $self.parent().remove();
+                            alert("삭제가 완료되었습니다.");
+                        })
+                        .fail(function(args){
+                            console.log(args)
+                        })
+                }
+
+            })
+
+
+
+        });
+    })();
+</script>
+
+<% include ../footer.ejs%>

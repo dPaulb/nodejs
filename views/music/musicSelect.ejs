@@ -1,0 +1,22 @@
+<% include ../header.ejs%>
+<div class="row">
+
+        <%music.forEach(function(music){%>
+        <%if(music.thumbnail)
+            {
+        %>
+        <div class="col-xs-3" id="colmd3">
+
+            <a href="/moremusic/<%=music.id%>" style="padding-bottom : 50px;">
+                <img style="object-fit : cover; height : 80%" src="musicuploads/<%=music.thumbnail%>">
+                <h4 style="text-align:center;"><%=music.title%></h4>
+            </a>
+
+
+        </div>
+        <%}%>
+        <%});%>
+
+
+</div>
+<% include ../footer.ejs%>
