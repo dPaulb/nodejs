@@ -1,7 +1,7 @@
 require('./removeByValue')();
 var MongoClient = require('mongodb').MongoClient;
 
-var url = 'mongodb://127.0.0.1:27017/boothbooth'
+var url = 'mongodb://db_url/boothbooth'
 
 
 
@@ -31,7 +31,7 @@ module.exports = function(io){
 
             socket.on('client message', function(data){
 
-                messagesCollection.insertOne({text : data.message, displayname : user.displayName}, function(err, res){
+                db.collection("messages").insertOne({text : data.message, displayname : user.displayName}, function(err, res){
                     console.log("inserted a document into the message")
                 })
 
