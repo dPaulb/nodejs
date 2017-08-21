@@ -1,33 +1,270 @@
-<% include ../header.ejs%>
-<div class="col-xs-2"></div>
-<img src="/uploads/<%=uploadPath%>">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/common.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan">
+    <title>JK's BOOTH ROOM</title>
+    <style>
 
 
-    <hr>
+        body{
+
+            background-color: rgba(189, 189, 189, 0.17);
+
+        }
+
+
+
+        hr{
+            border :  solid 1px black;
+        }
+
+        .main_banner{
+            padding-top: 30px;
+            border-radius : 10px;
+            margin-bottom: 30px;
+            color: inherit;
+
+
+
+        }
+        .main_booth_banner{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            color: inherit;
+            background-color : white;
+        }
+
+        img {
+
+
+            width : 100%;
+            height : 100%;
+            border-radius: 5px;
+
+
+
+
+
+
+
+        }
+
+
+
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+
+        }
+
+        .noimage img {
+            display : none;
+
+        }
+
+        #colmd3 {
+            width : 25%;
+            height : 250px;
+            margin-bottom : 10px;
+            padding-right :5px;
+            padding-left : 5px;
+        }
+
+        @media (max-width : 992px){
+            #colmd3 {
+                height : 150px;
+                width : 33%;
+                object-fit : cover;
+                margin-bottom : 10px;
+                padding-right : 2px;
+                padding-left : 2px;
+            }
+        }
+
+        #mainFont {
+            font-family: 'Baloo+Bhaijaan', Baloo Bhaijaan;
+            font-size : 65px;
+        }
+
+        #footerFont {
+            font-family: 'Baloo+Bhaijaan', Baloo Bhaijaan;
+
+        }
+
+        #bannerFont {
+            font-family: 'Baloo+Bhaijaan', Baloo Bhaijaan;
+
+
+        }
+
+        #bigBanner, a:hover {
+            color: white;
+
+        }
+        #bigBanner, a:hover {
+            color:white;
+            text-decoration: none;
+        }
+
+
+        #modalImage {
+            border-radius: 10px;
+            width:100%;
+            height : 100%;
+            object-fit : cover;
+        }
+
+
+
+
+        @media (min-width : 768px){
+
+
+
+            #modalImage {
+                border-radius: 10px;
+                width:75%;
+                height : 100%;
+                object-fit : cover
+            }
+
+            #modalHr {
+                width : 75%;
+                margin-left : 0;
+                margin-right : 0;
+                margin-bottom : 10px;
+                margin-top : 10px;
+            }
+
+            #modalContent {
+                width : 75%;
+            }
+        }
+
+        @media (min-width : 992px){
+            #modalImage {
+                border-radius: 10px;
+                width: 89%;
+                height : 100%;
+                object-fit : cover
+            }
+
+            #modalHr {
+                width : 89%;
+                margin-left : 0;
+                margin-right : 0;
+                margin-bottom : 10px;
+                margin-top : 10px;
+            }
+
+            #modalContent {
+                width : 89%;
+            }
+        }
+
+        @media (min-width : 1200px){
+            #modalImage {
+                border-radius: 10px;
+                width: 73.5%;
+                height : 100%;
+                object-fit : cover
+            }
+
+            #modalHr {
+                width : 73.5%;
+                margin-left : 0;
+                margin-right : 0;
+                margin-bottom : 10px;
+                margin-top : 10px;
+            }
+
+            #modalContent {
+                width : 73.5%;
+            }
+        }
+
+
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+            select,
+            textarea,
+            input {
+                font-size: 16px;
+            }
+        }
+
+
+
+
+    </style>
+    <script>
+        function goBack(){
+            history.go(0);
+
+        }
+
+
+
+
+    </script>
+</head>
+<body>
+<div class="container">
+
+    <div class="main_banner">
+
+        <img id="modalImage" src="/uploads/<%=uploadPath%>">
+
+
+    <hr id="modalHr">
     <div>
 
         <div id="commentArea">
             <% comment.forEach(function(comment){%>
             <div>
                 <%=comment.displayName%> : <%=comment.content%>
-                <%if(userData.userID === comment.userID || userData.userID === 'admin'){%>
+                <%if(isLogin){
+                    if(userData.userID === comment.userID || userData.userID === 'admin'){
+                %>
                 (<a class="comment_delete" comment_id="<%=comment.id%>">삭제</a>)
-                <%}%>
+                <%}}%>
             </div>
             <%})%>
         </div>
         <div>
             <form method="post" action="" id="commentForm">
                 <input type="hidden" name="uploadPath" value="<%=uploadPath%>">
-                <textarea class="form-control" name="content"></textarea>
+                <textarea class="form-control" name="content" id="modalContent"></textarea>
                 <button class="btn btn-primary" style="margin-top: 10px">댓글작성</button>
             </form>
         </div>
     </div>
+</div>
 
 
 
-<div class="col-xs-2"></div>
 
 <script>
     (function(){
@@ -84,6 +321,28 @@
 
         });
     })();
+
+
+    $(function() {
+
+        var $body = $(document);
+        $body.bind('scroll', function() {
+            // "Disable" the horizontal scroll.
+            if ($body.scrollLeft() !== 0) {
+                $body.scrollLeft(0);
+            }
+        });
+
+    });
+
+
 </script>
 
-<% include ../footer.ejs%>
+
+</div>
+</div>
+<div class="container" id="footerFont">
+
+</div>
+</body>
+</html>

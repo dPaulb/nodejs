@@ -1,57 +1,402 @@
-<%include ../header.ejs%>
-<div class="row">
-    <%
-    if(category.content){
-        var foo = category.content.split('<img');
-    for(var i=1;i<foo.length;i++)
-    {
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/common.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://rawgit.com/saribe/eModal/master/dist/eModal.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 
-    %>
-    <div name="photos" id="colmd3" class="col-xs-3">
-        <a href="/photoView/<%=foo[i].split('src=')[1].split('"')[1].split('/uploads')[1].split('/')[1]%>"><img src="<%=foo[i].split('src=')[1].split('"')[1]%>" style="object-fit: cover;"></a>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/united/bootstrap.min.css" rel="stylesheet" >
+    <link href="http//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>JK's BOOTH ROOM</title>
+    <style>
 
 
-        <!-- image_view_Modal -->
-        <div class="modal fade" id="myModal<%=i%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color: #F0F0F0">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true" >&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel"><%=category.title%></h4>
-                    </div>
-                    <div class="modal-body">
-                        <a href="#"><img style="border-radius: 10px;width:100%;height : 100%;object-fit : cover;" src="<%=foo[i].split('src=')[1].split('"')[1]%>"></a>
 
 
-                    </div>
-                    <div class="modal-footer" style="background-color: #F0F0F0">
+        body{
+
+            background-color: rgba(189, 189, 189, 0.17);
 
 
+        }
+
+
+
+
+
+
+        hr{
+            border :  solid 1px black;
+        }
+
+        .main_banner{
+            padding-top: 30px;
+            border-radius : 10px;
+            margin-bottom: 30px;
+            color: inherit;
+
+
+        }
+        .main_booth_banner{
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+            color: inherit;
+            background-color : white;
+        }
+
+        img {
+
+
+            width : 100%;
+            height : 100%;
+            border-radius: 5px;
+
+
+
+
+
+
+
+        }
+
+
+
+        .btn-file {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-file input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            font-size: 100px;
+            text-align: right;
+            filter: alpha(opacity=0);
+            opacity: 0;
+            outline: none;
+            background: white;
+            cursor: inherit;
+            display: block;
+
+        }
+
+        .noimage img {
+            display : none;
+
+        }
+
+        #colmd3 {
+            width : 25%;
+            height : 250px;
+            margin-bottom : 10px;
+            padding-right :5px;
+            padding-left : 5px;
+        }
+
+        @media (max-width : 992px){
+            #colmd3 {
+                height : 150px;
+                width : 33%;
+                object-fit : cover;
+                margin-bottom : 10px;
+                padding-right : 2px;
+                padding-left : 2px;
+            }
+        }
+
+        #mainFont {
+            font-family: 'Baloo+Bhaijaan', Baloo Bhaijaan;
+            font-size : 65px;
+        }
+
+        #footerFont {
+            font-family: 'Baloo+Bhaijaan', Baloo Bhaijaan;
+
+        }
+
+        #bannerFont {
+            font-family: 'Baloo+Bhaijaan', Baloo Bhaijaan;
+
+
+        }
+
+        #bigBanner, a:hover {
+            color: white;
+
+        }
+        #bigBanner, a:hover {
+            color:white;
+            text-decoration: none;
+        }
+
+        #modalImage {
+            border-radius: 10px;
+            width:100%;
+            height : 100%;
+            object-fit : cover;
+        }
+
+
+
+        .modal-body{
+            overflow-x: hidden;
+        }
+
+        .modal.fade.in {
+            overflow : hidden;
+        }
+
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+            select,
+            textarea,
+            input {
+                font-size: 16px;
+            }
+        }
+
+
+
+
+    </style>
+    <script>
+
+
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="main_banner">
+
+        <a href="/" class="btn btn-align-left" style="color : black">
+            <span class="glyphicon glyphicon-home"></span>
+        </a>
+
+        <div id="mainFont" style="color : black; text-align: center">
+            JK's BOOTH
+
+        </div>
+
+
+
+
+
+        <div class="row">
+            <hr>
+        </div>
+
+        <div class="row">
+            <%
+            if(category.content){
+                var foo = category.content.split('<img');
+            for(var i=1;i<foo.length;i++)
+            {
+
+
+            %>
+            <div name="photos" id="colmd3" class="col-xs-3">
+               <img src="<%=foo[i].split('src=')[1].split('"')[1]%>" style="object-fit: cover;" onclick="ajaxDemo<%=i%>()">
+            <script>
+
+                function iframeDemo() {
+                    var title = 'Insiders';
+                    return eModal
+                        .iframe("/photoView/<%= foo[i].split('src=')[1].split('"')[1].split('/uploads')[1].split('/')[1] %>", title)
+                }
+                function ajaxDemo<%=i%>() {
+                    var title = 'Ajax modal';
+
+                    var params = {
+
+                        size: eModal.size.lg,
+                        title: title,
+
+                        url: "/photoView/<%= foo[i].split('src=')[1].split('"')[1].split('/uploads')[1].split('/')[1] %>"
+                    };
+
+                    return eModal
+                        .ajax(params)
+
+                }
+            </script>
+
+                <!-- image_view_Modal -->
+                <div class="modal fade" id="myModal<%=i%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header" style="background-color: #F0F0F0">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true" >&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel"><%=category.title%></h4>
+                            </div>
+                            <div class="modal-body">
+                                <script>
+
+                                </script>
+                            </div>
+                            <div class="modal-footer" style="background-color: #F0F0F0">
+
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <%}
+            if(foo.length >= 9){
+            %>
+
+            <!--<div class="col-xs-12">-->
+            <!--<button type="button" id="more" class="btn btn-default btn-block">더보기</button>-->
+            <!--</div>-->
+
+            <%}}%>
+
         </div>
-    </div>
-    <%}
-    if(foo.length >= 9){
-    %>
-
-    <!--<div class="col-xs-12">-->
-    <!--<button type="button" id="more" class="btn btn-default btn-block">더보기</button>-->
-    <!--</div>-->
-
-    <%}}%>
-
-</div>
 
 
 <script>
     document.addEventListener('contextmenu', event => event.preventDefault());
+
+    $(document).ready(function () {/* activate scroll spy menu */
+
+        var iconPrefix = '.glyphicon-';
+
+
+        $(iconPrefix + 'cloud').click(ajaxDemo);
+        $(iconPrefix + 'comment').click(alertDemo);
+        $(iconPrefix + 'ok').click(confirmDemo);
+        $(iconPrefix + 'pencil').click(promptDemo);
+
+///////////////////* Implementation *///////////////////
+
+// Demos
+        function ajaxDemo() {
+            var title = 'Ajax modal';
+            var params = {
+                buttons: [
+                    { text: 'Close', close: true, style: 'danger' },
+                    { text: 'New content', close: false, style: 'success', click: ajaxDemo }
+                ],
+                size: eModal.size.lg,
+                title: title,
+                url: 'http://maispc.com/app/proxy.php?url=http://loripsum.net/api/' + Math.floor((Math.random() * 7) + 1) + '/short/ul/bq/prude/code/decorete'
+            };
+
+            return eModal
+                .ajax(params)
+                .then(function () { alert('Ajax Request complete!!!!', title) });
+        }
+
+        function alertDemo() {
+            var title = 'Alert modal';
+            return eModal
+                .alert('You welcome! Want clean code ?', title)
+                .then(function () { alert('Alert modal is visible.', title); });
+        }
+
+        function confirmDemo() {
+            var title = 'Confirm modal callback feedback';
+            return eModal
+                .confirm('It is simple enough?', 'Confirm modal')
+                .then(function (/* DOM */) { alert('Thank you for your OK pressed!', title); })
+                .fail(function (/*null*/) { alert('Thank you for your Cancel pressed!', title) });
+        }
+        <%
+        if(category.content){
+            var foo = category.content.split('<img');
+        for(var i=1;i<foo.length;i++)
+        {
+
+
+        %>
+        function iframeDemo() {
+            var title = 'Insiders';
+            return eModal
+                .iframe("/photoView/<%= foo[i].split('src=')[1].split('"')[1].split('/uploads')[1].split('/')[1] %>", title)
+        }
+        <%}
+        if(foo.length >= 9){
+        %>
+
+
+        <%}}%>
+        function promptDemo() {
+            var title = 'Prompt modal callback feedback';
+            return eModal
+                .prompt({ size: eModal.size.sm, message: 'What\'s your name?', title: title })
+                .then(function (input) { alert({ message: 'Hi ' + input + '!', title: title, imgURI: 'https://avatars0.githubusercontent.com/u/4276775?v=3&s=89' }) })
+                .fail(function (/**/) { alert('Why don\'t you tell me your name?', title); });
+        }});
+
 </script>
 <a href="/admin/edit/<%=category.id%>" class="btn pull-right" style="color : black;">
     <span class="glyphicon glyphicon-edit" style="font-size : 30px;"></span>
 </a>
 
-<%include ../footer.ejs%>
 
+
+    </div>
+</div>
+<div class="container" id="footerFont">
+    <div class="row">
+        <hr>
+
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-4">
+            <h5 style="text-align: center; color : black">Copyright &copy; 2017 JK All Rights Reserved</h5>
+            <h5 style="text-align: center; color : black">Made by Dongho Choi</h5>
+
+        </div>
+
+        <div class="col-md-4">
+            <div class="pull-right">
+                <a href="/categorysearch" class="btn pull-right" style="color : black">
+                    <span class="glyphicon glyphicon-search" style="font-size : 30px;"></span>
+                </a>
+                <!--<a href="/checkout/nomember" class="btn pull-right" style="color : black">-->
+                <!--<span class="glyphicon glyphicon-plane" style="font-size : 30px;"></span>-->
+                <!--</a>-->
+                <!--<a href="/order" class="btn btn-align-left" style="color : black">-->
+                <!--<span class="glyphicon glyphicon-eye-open" style="font-size : 30px;"></span>-->
+                <!--</a>-->
+                <a href="/admin" class="btn btn-align-left" style="color : black">
+                    <span class="glyphicon glyphicon-circle-arrow-up" style="font-size : 30px;"></span>
+                </a>
+
+                <a href="/adminMusic" class="btn btn-align-left" style="color : black">
+                    <span class="glyphicon glyphicon-music" style="font-size : 30px;"></span>
+                </a>
+                <!--<a href="/cart" class="btn btn-align-left" style="color : black">-->
+                <!--<span class="glyphicon glyphicon-shopping-cart" style="font-size : 30px;"></span>-->
+                <!--</a>-->
+                <%if(isLogin){%>
+                <div class="pull-right">
+                    <a href="/accounts/logout" class="btn btn-align-left" style="color : black">
+                        <span class="glyphicon glyphicon-log-out" style="font-size : 30px;"></span>
+                    </a>
+                </div>
+                <%}%>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
+
+
+`

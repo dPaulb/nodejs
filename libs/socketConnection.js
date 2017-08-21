@@ -1,7 +1,7 @@
 require('./removeByValue')();
 var MongoClient = require('mongodb').MongoClient;
 
-var url = 'mongodb://db_url/boothbooth'
+var url = 'mongodb://127.0.0.1:27017/boothbooth'
 
 
 
@@ -24,14 +24,14 @@ module.exports = function(io){
 
             //io.emit('server message', {message : "유저가 입장했습니다."/*socket.id*/, displayname : user.displayName})
 
-          db.collection("messages").find().toArray().then(function(docs){
+            db.collection("messages").find().toArray().then(function(docs){
                 io.emit("chatHistory", docs);
 
             })
 
             socket.on('client message', function(data){
 
-                db.collection("messages").insertOne({text : data.message, displayname : user.displayName}, function(err, res){
+                messagesCollection.insertOne({text : data.message, displayname : user.displayName}, function(err, res){
                     console.log("inserted a document into the message")
                 })
 

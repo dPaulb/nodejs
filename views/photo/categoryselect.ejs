@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.css" rel="stylesheet">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.6/summernote.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Baloo+Bhaijaan">
+
     <title>JK's BOOTH ROOM</title>
     <style>
         body{
@@ -89,6 +91,7 @@
             text-align: center;
         }
 
+
         @media screen and (min-width: 768px) {
             .modal.modal-center:before {
                 display: inline-block;
@@ -105,7 +108,7 @@
         }
 
         .modal-image {
-            height : 500px;
+            height : 300px;
             width : 100%;
             object-fit: cover;
         }
@@ -138,7 +141,7 @@
             }
             .modal.modal-center:before {
                 display: inline-block;
-                vertical-align: middle;
+                /*vertical-align: middle;*/
                 content: " ";
                 height: 100%;
             }
@@ -155,8 +158,8 @@
             }
 
             .modal-dialog.modal-fullsize {
-                width:70%;
-                height: 30%;
+                width: 99%;
+                height: 50%;
                 margin: 0;
                 padding: 0;
             }
@@ -166,7 +169,7 @@
                 border-radius: 10px;
             }
             .modal-image {
-                height : 500px;
+                height : 350px;
                 width : 100%;
                 object-fit: cover;
             }
@@ -189,8 +192,8 @@
             }
 
             .modal-dialog.modal-fullsize {
-                width:80%;
-                height: 60%;
+                width:99%;
+                height: 99%;
                 margin: 0;
                 padding: 0;
             }
@@ -200,7 +203,7 @@
                 border-radius: 10px;
             }
             .modal-image {
-                height : 250px;
+                height : 350px;
                 width : 100%;
                 object-fit: cover;
             }
@@ -224,8 +227,8 @@
             }
 
             .modal-dialog.modal-fullsize {
-                width:80%;
-                height: 60%;
+                width:99%;
+                height: 99%;
                 margin: 0;
                 padding: 0;
             }
@@ -235,7 +238,7 @@
                 border-radius: 10px;
             }
             .modal-image {
-                height : 250px;
+                height : 330px;
                 width : 100%;
                 object-fit: cover;
             }
@@ -247,7 +250,64 @@
             }
         }
 
+        @media (max-width : 388px){
+            #colmd3 {
+                height : 100px;
+                width : 25%;
+                object-fit : cover;
+                margin-bottom : 10px;
+                padding-right : 2px;
+                padding-left : 2px;
+            }
 
+            .modal-dialog.modal-fullsize {
+                width:95%;
+                height: 95%;
+                margin: 0;
+                padding: 0;
+            }
+            .modal-content.modal-fullsize {
+                height: auto;
+                min-height: 100%;
+                border-radius: 10px;
+            }
+            .modal-image {
+                height : 150px;
+                width : 100%;
+                object-fit: cover;
+            }
+            .modal.modal-center:before {
+                display: inline-block;
+                /*vertical-align: middle;*/
+                content: " ";
+                height: 100%;
+            }
+        }
+
+        #mainFont {
+            font-family: 'Baloo+Bhaijaan', Baloo Bhaijaan;
+            font-size : 65px;
+        }
+
+        #footerFont {
+            font-family: 'Baloo+Bhaijaan', Baloo Bhaijaan;
+
+        }
+
+        #bannerFont {
+            font-family: 'Baloo+Bhaijaan', Baloo Bhaijaan;
+
+
+        }
+
+        #bigBanner, a:hover {
+            color: white;
+
+        }
+        #bigBanner, a:hover {
+            color:white;
+            text-decoration: none;
+        }
 
 
 
@@ -265,7 +325,14 @@
         <a href="/" class="btn btn-align-left" style="color : black">
             <span class="glyphicon glyphicon-home"></span>
         </a>
-        <a href="/"><h1 style="color : black; text-align: center">JK's BOOTH</h1></a>
+
+        <a href="/">
+            <div id="mainFont" style="color : black; text-align: center">
+                JK's BOOTH
+
+            </div>
+        </a>
+
 
 
 
@@ -299,10 +366,12 @@
                                 <a href="#"><img src="uploads/<%=foo[1]%>" class="modal-image"></a>
                                 <div class="noimage"><%-category.content%></div>
                                 <a href="/morephoto/<%=category.id%>" class="btn btn-primary">More</a>
-                            </div>
-                            <div class="modal-footer">
                                 <a href="/photocategoryselect/delete/<%=category.id%>" type="button" class="btn btn-danger">삭제하기</a>
+
                             </div>
+                            <!--<div class="modal-footer">-->
+
+                            <!--</div>-->
                         </div>
                     </div>
                 </div>
@@ -340,34 +409,34 @@
 
 <!-- upload_Modal -->
 <!--<div class="modal fade" id="upload_image_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">-->
-    <!--<div class="modal-dialog" role="document">-->
-        <!--<div class="modal-content">-->
-            <!--<div class="modal-header" style="background-color: #F0F0F0">-->
-                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true" >&times;</span></button>-->
-                <!--<h4 class="modal-title" id="myModalLabel">게시물 작성</h4>-->
-            <!--</div>-->
-            <!--<div class="modal-body">-->
+<!--<div class="modal-dialog" role="document">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header" style="background-color: #F0F0F0">-->
+<!--<button type="button" class="close" data-dismiss="modal" aria-label="Close" ><span aria-hidden="true" >&times;</span></button>-->
+<!--<h4 class="modal-title" id="myModalLabel">게시물 작성</h4>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
 
-                <!--<form id="upload_form" action="" method="post" enctype="multipart/form-data">-->
-                    <!--<input type="text" name="name" class="form-control" placeholder="제목">-->
+<!--<form id="upload_form" action="" method="post" enctype="multipart/form-data">-->
+<!--<input type="text" name="name" class="form-control" placeholder="제목">-->
 
-                    <!--<img name="blah" id="blah" src="/img/white.jpg" alt="your image" style="width : 100%; height : 100%;"/>-->
-                    <!--<span class="btn btn-default btn-lg btn-file">-->
-                    <!--사진 찾기 <input type="file" id="imgInp" name="photo" multiple>-->
-                <!--</span>-->
-                    <!--<br>-->
-                    <!--<br>-->
-                    <!--<textarea id="summernote" name="content"></textarea>-->
-                    <!--<input type="submit" class="btn btn-default" value="올리기">-->
-                <!--</form>-->
-            <!--</div>-->
-            <!--<div class="modal-footer" style="background-color: #F0F0F0">-->
+<!--<img name="blah" id="blah" src="/img/white.jpg" alt="your image" style="width : 100%; height : 100%;"/>-->
+<!--<span class="btn btn-default btn-lg btn-file">-->
+<!--사진 찾기 <input type="file" id="imgInp" name="photo" multiple>-->
+<!--</span>-->
+<!--<br>-->
+<!--<br>-->
+<!--<textarea id="summernote" name="content"></textarea>-->
+<!--<input type="submit" class="btn btn-default" value="올리기">-->
+<!--</form>-->
+<!--</div>-->
+<!--<div class="modal-footer" style="background-color: #F0F0F0">-->
 
 
-            <!--</div>-->
+<!--</div>-->
 
-        <!--</div>-->
-    <!--</div>-->
+<!--</div>-->
+<!--</div>-->
 <!--</div>-->
 
 <script type="text/javascript">

@@ -17,7 +17,7 @@ db.on('open', function(){
     console.log('mongodb connect');
 });
 
-var connect = mongoose.connect('mongodb://db_url/boothbooth', {useMongoClient : true});
+var connect = mongoose.connect('mongodb://127.0.0.1:27017/boothbooth', {useMongoClient : true});
 autoIncrement.initialize(connect);
 
 var admin = require('./routes/admin')
@@ -105,8 +105,8 @@ app.use('/statistics', statistics)
 app.use('/categorysearch', categorysearch)
 
 
-var server = app.listen(2222, function(){
-    console.log('Express listening on 2222');
+var server = app.listen(3000, function(){
+    console.log('Express listening on 3000');
 
 })
 
@@ -117,3 +117,7 @@ io.use(function(socket, next){
 })
 
 require('./libs/socketConnection')(io);
+
+
+
+

@@ -1,5 +1,6 @@
 var express = require('express');
 var CommentModel = require('../../models/CommentModel')
+var CategoryModel = require('../../models/CategoryModel')
 var router = express.Router();
 var co = require('co')
 var loginRequired = require('../../libs/loginRequired')
@@ -13,6 +14,7 @@ router.get('/:uploadPath', function(req, res){
         //var comment = yield CommentsModel.find({'product_id' : req.params.id}).exec();
         return {
             comment : yield CommentModel.find({'uploadPath' : req.params.uploadPath}).exec()
+
         }
     })
     getData.then(function(result){
